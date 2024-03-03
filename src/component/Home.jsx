@@ -1,7 +1,7 @@
 import React from 'react'
-
+import SearchLogic from './hooks/SearchLogic.jsx'
 const Home = () => {
-  return <div>Home</div>
+  return <SearchLogic />
 }
 
 export default Home

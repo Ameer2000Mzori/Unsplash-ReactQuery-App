@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
 const SearchLogic = () => {
-  // const clientId = process.env.NEXT_PUBLIC_UNSPLASH_CLIENT_ID
-  // const UNSPLASH_ROOT = 'https://api.unsplash.com'
-  // export const getPhotosByQuery = async ({ query }: { query: string }) => {
-  //   const { data } = await axios.get(
-  //     `${UNSPLASH_ROOT}/search/photos?query=${query}&client_id=${clientId}&per_page=20`
-  //   )
-  //   return data
-  // }
-  // return <div>SearchLogic</div>
+  const searchTerm = 'cat'
+  const result = useQuery({
+    queryFn: () =>
+      axios.get(
+        `https://api.unsplash.com//search/photos?query=${searchTerm}&client_id=574599&per_page=20`
+      ),
+  })
+
+  console.log(result)
 }
 
 export default SearchLogic
