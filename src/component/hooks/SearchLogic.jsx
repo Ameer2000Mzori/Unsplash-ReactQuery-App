@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
-const SearchLogic = () => {
-  const searchTerm = 'cat'
-  const result = useQuery({
+const useSearchLogic = (searchTerm, pages) => {
+  const accessKey = '25DRAuEnGbBRfk0JVmkEimzUQaVIMyfiDo9BUpPvOAg'
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['searchPhotos', searchTerm, pages],
     queryFn: () =>
-      axios.get(
-        `https://api.unsplash.com//search/photos?query=${searchTerm}&client_id=574599&per_page=20`
-      ),
+      axios
+        .get(`https://api.unsplash.com/search/photos`, {
+          params: {
+            query: searchTerm,
+            client_id: accessKey,
+            per_page: pages,
+          },
+        })
+        .then((res) => res.data),
   })
 
-  console.log(result)
+  return { data, isLoading, isError }
 }
 
-export default SearchLogic
+export default useSearchLogic
