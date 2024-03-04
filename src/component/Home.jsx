@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import SearchLogic from './hooks/SearchLogic.jsx'
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('cat')
+  const [terms, setTerms] = useState('cat')
   const [pages, setPages] = useState(10)
   const { data, isLoading, isError } = SearchLogic(searchTerm, pages)
 
   const getData = () => {
-    setSearchTerm('cat')
+    setSearchTerm(terms)
   }
 
   return (
@@ -14,9 +15,9 @@ const Home = () => {
       <button onClick={getData}>Get Data</button>
       <input
         type="text"
-        value={searchTerm}
+        value={terms}
         onChange={(e) => {
-          setSearchTerm(e.target.value)
+          setTerms(e.target.value)
         }}
       />
 
